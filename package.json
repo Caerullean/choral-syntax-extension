@@ -1,0 +1,83 @@
+{
+  "name": "choral-syntax-extension",
+  "displayName": "Choral Syntax Extension",
+  "description": "An extension to provide help with writing choral code in VS Code",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.79.2"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "choral-syntax-extension.helloWorld",
+        "title": "Display Greetings"
+      },
+      {
+        "command": "choral-syntax-extension.displayTime",
+        "title": "Display Time"
+      }
+    ],
+    "languages": [
+      {
+        "id": "ch",
+        "aliases": [
+          "Choral",
+          "choral",
+          "ch"
+        ],
+        "extensions": [
+          ".ch"
+        ],
+        "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "chh",
+        "aliases": [
+          "Choral Header",
+          "choral header",
+          "chh"
+        ],
+        "extensions": [
+          ".chh"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "ch",
+        "scopeName": "source.choral",
+        "path": "./syntaxes/ch.tmLanguage.json"
+      },
+      {
+        "language": "chh",
+        "scopeName": "source.choral",
+        "path": "./syntaxes/ch.tmLanguage.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.103.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@typescript-eslint/eslint-plugin": "^8.42.0",
+    "@typescript-eslint/parser": "^8.42.0",
+    "eslint": "^9.34.0",
+    "typescript": "^5.9.2",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}

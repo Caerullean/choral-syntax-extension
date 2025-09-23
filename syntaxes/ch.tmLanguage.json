@@ -1,0 +1,1606 @@
+{
+    "name": "Choral",
+    "scopeName": "source.choral",
+    "fileTypes": [
+        "ch",
+        "chh"
+    ],
+    "patterns": [
+        {
+            "begin": "\\b(package)\\b\\s*",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.other.package.choral"
+                }
+            },
+            "end": "\\s*(;)",
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.terminator.choral"
+                }
+            },
+            "name": "meta.package.choral",
+            "contentName": "storage.modifier.package.choral",
+            "patterns": [
+                {
+                    "include": "#comments"
+                },
+                {
+                    "match": "(?<=\\.)\\s*\\.|\\.(?=\\s*;)",
+                    "name": "invalid.illegal.character_not_allowed_here.choral"
+                },
+                {
+                    "match": "(?<!_)_(?=\\s*(\\.|;))|\\b\\d+|-+",
+                    "name": "invalid.illegal.character_not_allowed_here.choral"
+                },
+                {
+                    "match": "(?x)\\b(?<!\\$)\n(abstract|boolean|byte|case|catch|char|class|default|double|else|enum|extends|final|float|if|implements|import|int|\ninterface|long|new|package|private|protected|public|\nreturn|short|static|super|switch|this|try|void|\ntrue|false|null)\\b",
+                    "name": "invalid.illegal.character_not_allowed_here.choral"
+                },
+                {
+                    "match": "\\.",
+                    "name": "punctuation.separator.choral"
+                }
+            ]
+        },
+        {
+            "begin": "\\b(import)\\b\\s",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.other.import.choral"
+                },
+                "2": {
+                    "name": "storage.modifier.choral"
+                }
+            },
+            "end": "\\s*(;)",
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.terminator.choral"
+                }
+            },
+            "name": "meta.import.choral",
+            "contentName": "storage.modifier.import.choral",
+            "patterns": [
+                {
+                    "include": "#comments"
+                },
+                {
+                    "match": "(?<=\\.)\\s*\\.|\\.(?=\\s*;)",
+                    "name": "invalid.illegal.character_not_allowed_here.choral"
+                },
+                {
+                    "match": "(?<!\\.)\\s*\\*",
+                    "name": "invalid.illegal.character_not_allowed_here.choral"
+                },
+                {
+                    "match": "(?<!_)_(?=\\s*(\\.|;))|\\b\\d+|-+",
+                    "name": "invalid.illegal.character_not_allowed_here.choral"
+                },
+                {
+                    "match": "(?x)\\b(?<!\\$)\n(abstract|boolean|byte|case|catch|char|class|default|double|else|enum|extends|final|float|if|implements|import|int|\ninterface|long|new|package|private|protected|public|\nreturn|short|static|super|switch|this|try|void|\ntrue|false|null)\\b",
+                    "name": "invalid.illegal.character_not_allowed_here.choral"
+                },
+                {
+                    "match": "\\.",
+                    "name": "punctuation.separator.choral"
+                },
+                {
+                    "match": "\\*",
+                    "name": "variable.language.wildcard.choral"
+                }
+            ]
+        },
+        {
+            "include": "#code"
+        }
+    ],
+    "repository": {
+        "all-types": {
+            "patterns": [
+                {
+                    "include": "#primitive-types"
+                },
+                {
+                    "include": "#object-types"
+                }
+            ]
+        },
+        "annotations": {
+            "patterns": [
+                {
+                    "begin": "((@)\\s*([^\\s(]+))(\\()",
+                    "beginCaptures": {
+                        "2": {
+                            "name": "punctuation.definition.annotation.choral"
+                        },
+                        "3": {
+                            "name": "storage.type.annotation.choral"
+                        },
+                        "4": {
+                            "name": "punctuation.definition.annotation-arguments.begin.bracket.round.choral"
+                        }
+                    },
+                    "end": "\\)",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.annotation-arguments.end.bracket.round.choral"
+                        }
+                    },
+                    "name": "meta.declaration.annotation.choral",
+                    "patterns": [
+                        {
+                            "captures": {
+                                "1": {
+                                    "name": "constant.other.key.choral"
+                                },
+                                "2": {
+                                    "name": "keyword.operator.assignment.choral"
+                                }
+                            },
+                            "match": "(\\w*)\\s*(=)"
+                        },
+                        {
+                            "include": "#code"
+                        }
+                    ]
+                },
+                {
+                    "match": "(@)(interface)\\s+(\\w*)|((@)\\s*(\\w+))",
+                    "name": "meta.declaration.annotation.choral",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.annotation.choral"
+                        },
+                        "2": {
+                            "name": "storage.modifier.choral"
+                        },
+                        "3": {
+                            "name": "storage.type.annotation.choral"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.annotation.choral"
+                        },
+                        "6": {
+                            "name": "storage.type.annotation.choral"
+                        }
+                    }
+                }
+            ]
+        },
+        "block": {
+            "begin": "{",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.section.block.begin.bracket.curly.choral"
+                }
+            },
+            "end": "}",
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.section.block.end.bracket.curly.choral"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#code"
+                }
+            ]
+        },
+        "new": {
+            "begin": "\\bnew\\b",
+            "beginCaptures": {
+                "0": {
+                    "name": "keyword.control.new.choral"
+                }
+            },
+            "end": "(?=;|\\)|\\.|,|\\?|:|}|\\+|\\-|\\*|\\/(?!\\/|\\*)|%|!|&|\\||\\^|=)",
+            "patterns": [
+                {
+                    "include": "#comments"
+                },
+                {
+                    "include": "#function-call"
+                },
+                {
+                    "include": "#all-types"
+                },
+                {
+                    "include": "#parens"
+                }
+            ]
+        },
+        "class": {
+            "begin": "(?=\\w?[\\w\\s-]*\\b(?:class|(?<!@)interface)\\s+[\\w$]+\\s*@)",
+            "end": "}",
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.section.class.end.bracket.curly.choral"
+                }
+            },
+            "name": "meta.class.choral",
+            "patterns": [
+                {
+                    "include": "#storage-modifiers"
+                },
+                {
+                    "include": "#generics"
+                },
+                {
+                    "include": "#comments"
+                },
+                {
+                    "match": "(class|(?<!@)interface)\\s+([\\w$]+)\\s*(@\\s*([\\w$]+|\\([\\w\\s$,]+\\)))",
+                    "captures": {
+                        "1": {
+                            "name": "storage.modifier.choral"
+                        },
+                        "2": {
+                            "name": "entity.name.type.class.choral"
+                        },
+                        "3": {
+                            "patterns": [
+                                {
+                                    "include": "#roles"
+                                }
+                            ]
+                        }
+                    },
+                    "name": "meta.class.identifier.choral"
+                },
+                {
+                    "begin": "extends",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "storage.modifier.extends.choral"
+                        }
+                    },
+                    "end": "(?={|implements)",
+                    "name": "meta.definition.class.inherited.classes.choral",
+                    "patterns": [
+                        {
+                            "include": "#object-types-inherited"
+                        },
+                        {
+                            "include": "#comments"
+                        }
+                    ]
+                },
+                {
+                    "begin": "(implements)\\s",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "storage.modifier.implements.choral"
+                        }
+                    },
+                    "end": "(?=\\s*extends|\\{)",
+                    "name": "meta.definition.class.implemented.interfaces.choral",
+                    "patterns": [
+                        {
+                            "include": "#object-types-inherited"
+                        },
+                        {
+                            "include": "#comments"
+                        }
+                    ]
+                },
+                {
+                    "begin": "{",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.section.class.begin.bracket.curly.choral"
+                        }
+                    },
+                    "end": "(?=})",
+                    "contentName": "meta.class.body.choral",
+                    "patterns": [
+                        {
+                            "include": "#class-body"
+                        }
+                    ]
+                }
+            ]
+        },
+        "class-body": {
+            "patterns": [
+                {
+                    "include": "#comments"
+                },
+                {
+                    "include": "#enums"
+                },
+                {
+                    "include": "#class"
+                },
+                {
+                    "include": "#class-fields-and-methods"
+                },
+                {
+                    "include": "#annotations"
+                },
+                {
+                    "include": "#member-variables"
+                },
+                {
+                    "include": "#code"
+                }
+            ]
+        },
+        "class-fields-and-methods": {
+            "patterns": [
+                {
+                    "begin": "(?=\\=)",
+                    "end": "(?=;)",
+                    "patterns": [
+                        {
+                            "include": "#code"
+                        }
+                    ]
+                },
+                {
+                    "include": "#methods"
+                }
+            ]
+        },
+        "code": {
+            "patterns": [
+                {
+                    "include": "#annotations"
+                },
+                {
+                    "include": "#comments"
+                },
+                {
+                    "include": "#enums"
+                },
+                {
+                    "include": "#class"
+                },
+                {
+                    "include": "#block"
+                },
+                {
+                    "include": "#try-catch"
+                },
+                {
+                    "include": "#parens"
+                },
+                {
+                    "include": "#constants-and-special-vars"
+                },
+                {
+                    "include": "#numbers"
+                },
+                {
+                    "include": "#new"
+                },
+                {
+                    "include": "#keywords"
+                },
+                {
+                    "include": "#forward-chain"
+                },
+                {
+                    "include": "#storage-modifiers"
+                },
+                {
+                    "include": "#method-call"
+                },
+                {
+                    "include": "#function-call"
+                },
+                {
+                    "include": "#variables"
+                },
+                {
+                    "include": "#objects"
+                },
+                {
+                    "include": "#properties"
+                },
+                {
+                    "include": "#strings"
+                },
+                {
+                    "include": "#all-types"
+                },
+                {
+                    "match": ",",
+                    "name": "punctuation.separator.delimiter.choral"
+                },
+                {
+                    "match": "\\.",
+                    "name": "punctuation.separator.period.choral"
+                },
+                {
+                    "match": ";",
+                    "name": "punctuation.terminator.choral"
+                }
+            ]
+        },
+        "comments": {
+            "patterns": [
+                {
+                    "captures": {
+                        "0": {
+                            "name": "punctuation.definition.comment.choral"
+                        }
+                    },
+                    "match": "/\\*\\*/",
+                    "name": "comment.block.empty.choral"
+                },
+                {
+                    "include": "#comments-inline"
+                }
+            ]
+        },
+        "comments-inline": {
+            "patterns": [
+                {
+                    "begin": "/\\*",
+                    "captures": {
+                        "0": {
+                            "name": "punctuation.definition.comment.choral"
+                        }
+                    },
+                    "end": "\\*/",
+                    "name": "comment.block.choral"
+                },
+                {
+                    "begin": "(^[ \\t]+)?(?=//)",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.whitespace.comment.leading.choral"
+                        }
+                    },
+                    "end": "(?!\\G)",
+                    "patterns": [
+                        {
+                            "begin": "//",
+                            "beginCaptures": {
+                                "0": {
+                                    "name": "punctuation.definition.comment.choral"
+                                }
+                            },
+                            "end": "\\n",
+                            "name": "comment.line.double-slash.choral"
+                        }
+                    ]
+                }
+            ]
+        },
+        "constants-and-special-vars": {
+            "patterns": [
+                {
+                    "match": "\\b(true|false)\\s*(@\\s*([\\w$]+|\\[[\\w\\s$,]+\\]))",
+                    "captures": {
+                        "1": {
+                            "name": "constant.language.choral"
+                        },
+                        "2": {
+                            "patterns": [
+                                {
+                                    "include": "#roles"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "match": "\\b(null)\\s*(@\\s*([\\w$]+|\\([\\w\\s$,]+\\)))",
+                    "captures": {
+                        "1": {
+                            "name": "constant.language.choral"
+                        },
+                        "2": {
+                            "patterns": [
+                                {
+                                    "include": "#roles"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "match": "\\bthis\\b",
+                    "name": "variable.language.this.choral"
+                },
+                {
+                    "match": "\\bsuper\\b",
+                    "name": "variable.language.choral"
+                }
+            ]
+        },
+        "enums": {
+            "begin": "^\\s*([\\w\\s]*)(enum)\\s+(\\w+)\\s*(@\\s*[\\w$]+)",
+            "beginCaptures": {
+                "1": {
+                    "patterns": [
+                        {
+                            "include": "#storage-modifiers"
+                        }
+                    ]
+                },
+                "2": {
+                    "name": "storage.modifier.choral"
+                },
+                "3": {
+                    "name": "entity.name.type.enum.choral"
+                },
+                "4": {
+                    "patterns": [
+                        {
+                            "include": "#roles"
+                        }
+                    ]
+                }
+            },
+            "end": "}",
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.section.enum.end.bracket.curly.choral"
+                }
+            },
+            "name": "meta.enum.choral",
+            "patterns": [
+                {
+                    "begin": "\\b(extends)\\b",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "storage.modifier.extends.choral"
+                        }
+                    },
+                    "end": "(?={|\\bimplements\\b)",
+                    "name": "meta.definition.class.inherited.classes.choral",
+                    "patterns": [
+                        {
+                            "include": "#object-types-inherited"
+                        },
+                        {
+                            "include": "#comments"
+                        }
+                    ]
+                },
+                {
+                    "begin": "\\b(implements)\\b",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "storage.modifier.implements.choral"
+                        }
+                    },
+                    "end": "(?={|\\bextends\\b)",
+                    "name": "meta.definition.class.implemented.interfaces.choral",
+                    "patterns": [
+                        {
+                            "include": "#object-types-inherited"
+                        },
+                        {
+                            "include": "#comments"
+                        }
+                    ]
+                },
+                {
+                    "begin": "{",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.section.enum.begin.bracket.curly.choral"
+                        }
+                    },
+                    "end": "(?=})",
+                    "patterns": [
+                        {
+                            "begin": "(?<={)",
+                            "end": "(?=;|})",
+                            "patterns": [
+                                {
+                                    "include": "#comments"
+                                },
+                                {
+                                    "begin": "\\b(\\w+)\\b",
+                                    "beginCaptures": {
+                                        "1": {
+                                            "name": "constant.other.enum.choral"
+                                        }
+                                    },
+                                    "end": "(,)|(?=;|})",
+                                    "endCaptures": {
+                                        "1": {
+                                            "name": "punctuation.separator.delimiter.choral"
+                                        }
+                                    },
+                                    "patterns": [
+                                        {
+                                            "include": "#comments"
+                                        },
+                                        {
+                                            "begin": "\\(",
+                                            "beginCaptures": {
+                                                "0": {
+                                                    "name": "punctuation.bracket.round.choral"
+                                                }
+                                            },
+                                            "end": "\\)",
+                                            "endCaptures": {
+                                                "0": {
+                                                    "name": "punctuation.bracket.round.choral"
+                                                }
+                                            },
+                                            "patterns": [
+                                                {
+                                                    "include": "#code"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "begin": "{",
+                                            "beginCaptures": {
+                                                "0": {
+                                                    "name": "punctuation.bracket.curly.choral"
+                                                }
+                                            },
+                                            "end": "}",
+                                            "endCaptures": {
+                                                "0": {
+                                                    "name": "punctuation.bracket.curly.choral"
+                                                }
+                                            },
+                                            "patterns": [
+                                                {
+                                                    "include": "#class-body"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "include": "#class-body"
+                        }
+                    ]
+                }
+            ]
+        },
+        "forward-chain": {
+            "name": "meta.forward-chain.choral",
+            "begin": "(?<=>\\s*>)",
+            "end": "(?=>\\s*>|;)",
+            "patterns": [
+                {
+                    "include": "#method-reference"
+                },
+                {
+                    "include": "#constants-and-special-vars"
+                },
+                {
+                    "include": "#object-types"
+                },
+                {
+                    "include": "#objects"
+                },
+                {
+                    "include": "#properties"
+                }
+            ]
+        },
+        "function-call": {
+            "begin": "([A-Za-z_$][\\w$]*)\\s*(@\\s*([\\w$]+|\\([\\w\\s$,]+\\))\\s*)?(\\()",
+            "beginCaptures": {
+                "1": {
+                    "name": "entity.name.function.choral"
+                },
+                "2": {
+                    "patterns": [
+                        {
+                            "include": "#roles"
+                        }
+                    ]
+                },
+                "3": {
+                    "name": "punctuation.definition.parameters.begin.bracket.round.choral"
+                }
+            },
+            "end": "\\)",
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.parameters.end.bracket.round.choral"
+                }
+            },
+            "name": "meta.function-call.choral",
+            "patterns": [
+                {
+                    "include": "#code"
+                }
+            ]
+        },
+        "generics": {
+            "name": "meta.generic.choral",
+            "begin": "<",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.bracket.angle.choral"
+                }
+            },
+            "end": ">",
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.bracket.angle.choral"
+                }
+            },
+            "patterns": [
+                {
+                    "match": "\\b(extends|super)\\b",
+                    "name": "storage.modifier.$1.choral"
+                },
+                {
+                    "match": "(?<!\\.)([a-zA-Z$_][a-zA-Z0-9$_]*)\\s*(@\\s*([\\w$]+|\\([\\w\\s$,]+\\)))?(?=\\s*<)",
+                    "captures": {
+                        "1": {
+                            "name": "storage.type.choral"
+                        },
+                        "2": {
+                            "patterns": [
+                                {
+                                    "include": "#roles"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "match": "([a-zA-Z$_][a-zA-Z0-9$_]*)\\s*(@\\s*([\\w$]+|\\([\\w\\s$,]+\\)))?",
+                    "captures": {
+                        "1": {
+                            "name": "storage.type.generic.choral"
+                        },
+                        "2": {
+                            "patterns": [
+                                {
+                                    "include": "#roles"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "match": "&",
+                    "name": "punctuation.separator.types.choral"
+                },
+                {
+                    "match": ",",
+                    "name": "punctuation.separator.delimiter.choral"
+                },
+                {
+                    "match": "\\.",
+                    "name": "punctuation.separator.period.choral"
+                },
+                {
+                    "include": "#parens"
+                },
+                {
+                    "include": "#generics"
+                },
+                {
+                    "include": "#comments"
+                }
+            ]
+        },
+        "keywords": {
+            "patterns": [
+                {
+                    "match": "\\b(return|case|default|switch|if|else)\\b",
+                    "name": "keyword.control.choral"
+                },
+                {
+                    "match": "(>\\s*>)",
+                    "name": "keyword.operator.chain.choral"
+                },
+                {
+                    "match": "((&|\\|)=)",
+                    "name": "keyword.operator.assignment.bitwise.choral"
+                },
+                {
+                    "match": "(==|!=|<=|>=|<|>)",
+                    "name": "keyword.operator.comparison.choral"
+                },
+                {
+                    "match": "([+*/%-]=)",
+                    "name": "keyword.operator.assignment.arithmetic.choral"
+                },
+                {
+                    "match": "(=)",
+                    "name": "keyword.operator.assignment.choral"
+                },
+                {
+                    "match": "(\\-\\-|\\+\\+)",
+                    "name": "keyword.operator.increment-decrement.choral"
+                },
+                {
+                    "match": "(\\-|\\+|\\*|\\/|%)",
+                    "name": "keyword.operator.arithmetic.choral"
+                },
+                {
+                    "match": "(!|&&|\\|\\|)",
+                    "name": "keyword.operator.logical.choral"
+                },
+                {
+                    "match": "(\\||&)",
+                    "name": "keyword.operator.bitwise.choral"
+                }
+            ]
+        },
+        "member-variables": {
+            "begin": "(?=private|protected|public|abstract|static|final)",
+            "end": "(?=\\=|;)",
+            "patterns": [
+                {
+                    "include": "#storage-modifiers"
+                },
+                {
+                    "include": "#variables"
+                },
+                {
+                    "include": "#object-types"
+                }
+            ]
+        },
+        "method-call": {
+            "begin": "(\\.)\\s*(?=(<.*>)?\\s*[A-Za-z_$][\\w$]*\\s*\\()",
+            "beginCaptures": {
+                "1": {
+                    "name": "punctuation.separator.period.choral"
+                }
+            },
+            "end": "\\)",
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.parameters.end.bracket.round.choral"
+                }
+            },
+            "name": "meta.method-call.choral",
+            "patterns": [
+                {
+                    "include": "#generics"
+                },
+                {
+                    "begin": "([A-Za-z_$][\\w$]*)\\s*(\\()",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "entity.name.function.choral"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.parameters.begin.bracket.round.choral"
+                        }
+                    },
+                    "end": "(?=\\))",
+                    "patterns": [
+                        {
+                            "include": "#code"
+                        }
+                    ]
+                }
+            ]
+        },
+        "method-reference": {
+            "begin": "::",
+            "beginCaptures": {
+                "name": "keyword.operator.method-reference.choral"
+            },
+            "end": "(?=>\\s*>|;)",
+            "name": "meta.method-reference.choral",
+            "patterns": [
+                {
+                    "include": "#generics"
+                },
+                {
+                    "include": "#new"
+                },
+                {
+                    "match": "[A-Za-z_$][\\w$]*",
+                    "name": "entity.name.function.choral"
+                }
+            ]
+        },
+        "methods": {
+            "begin": "(?!new)(?=[\\w<].*\\s+)(?=([^=/]|/(?!/))+[^@]\\s*\\()",
+            "end": "(})|(?=;)",
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.section.method.end.bracket.curly.choral"
+                }
+            },
+            "name": "meta.method.choral",
+            "patterns": [
+                {
+                    "include": "#storage-modifiers"
+                },
+                {
+                    "begin": "(\\w+)\\s*(\\()",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "entity.name.function.choral"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.parameters.begin.bracket.round.choral"
+                        }
+                    },
+                    "end": "\\)",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.parameters.end.bracket.round.choral"
+                        }
+                    },
+                    "name": "meta.method.identifier.choral",
+                    "patterns": [
+                        {
+                            "include": "#parameters"
+                        },
+                        {
+                            "include": "#parens"
+                        },
+                        {
+                            "include": "#comments"
+                        }
+                    ]
+                },
+                {
+                    "include": "#generics"
+                },
+                {
+                    "begin": "(?=\\w.*\\s+\\w+\\s*\\()",
+                    "end": "(?=\\s+\\w+\\s*\\()",
+                    "name": "meta.method.return-type.choral",
+                    "patterns": [
+                        {
+                            "include": "#all-types"
+                        },
+                        {
+                            "include": "#parens"
+                        },
+                        {
+                            "include": "#comments"
+                        }
+                    ]
+                },
+                {
+                    "begin": "{",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.section.method.begin.bracket.curly.choral"
+                        }
+                    },
+                    "end": "(?=})",
+                    "contentName": "meta.method.body.choral",
+                    "patterns": [
+                        {
+                            "include": "#code"
+                        }
+                    ]
+                },
+                {
+                    "include": "#comments"
+                }
+            ]
+        },
+        "numbers": {
+            "patterns": [
+                {
+                    "match": "(?x)\n\\b(?<!\\$)\n(0(x|X)\n(\n  (?<!\\.)[0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?[Ll]?(?!\\.)\n  |\n  (\n    [0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?\\.?\n    |\n    ([0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?)?\\.[0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?\n  )\n  [Pp][+-]?[0-9]([0-9_]*[0-9])?[FfDd]?\n))\n\\b(?!\\$)\\s*(@\\s*([\\w$]+|\\[[\\w\\s$,]+\\]))",
+                    "captures": {
+                        "1": {
+                            "name": "constant.numeric.hex.choral"
+                        },
+                        "11": {
+                            "patterns": [
+                                {
+                                    "include": "#roles"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "match": "\\b(?<!\\$)(0(b|B)[01]([01_]*[01])?[Ll]?)\\b(?!\\$)\\s*(@\\s*([\\w$]+|\\[[\\w\\s$,]+\\]))",
+                    "captures": {
+                        "1": {
+                            "name": "constant.numeric.binary.choral"
+                        },
+                        "4": {
+                            "patterns": [
+                                {
+                                    "include": "#roles"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "match": "\\b(?<!\\$)(0[0-7]([0-7_]*[0-7])?[Ll]?)\\b(?!\\$)\\s*(@\\s*([\\w$]+|\\[[\\w\\s$,]+\\]))",
+                    "captures": {
+                        "1": {
+                            "name": "constant.numeric.octal.choral"
+                        },
+                        "3": {
+                            "patterns": [
+                                {
+                                    "include": "#roles"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "match": "(?x)\n(?<!\\$)\n(\n  \\b[0-9]([0-9_]*[0-9])?\\.\\B(?!\\.)\n  |\n  \\b[0-9]([0-9_]*[0-9])?\\.([Ee][+-]?[0-9]([0-9_]*[0-9])?)[FfDd]?\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?\\.([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?\\.([0-9]([0-9_]*[0-9])?)([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]?\\b\n  |\n  (?<!\\.)\\B\\.[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]?\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)[FfDd]?\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]\\b\n  |\n  \\b(0|[1-9]([0-9_]*[0-9])?)(?!\\.)[Ll]?\\b\n)\n(?!\\$)\\s*(@\\s*([\\w$]+|\\[[\\w\\s$,]+\\]))",
+                    "captures": {
+                        "1": {
+                            "name": "constant.numeric.decimal.choral"
+                        },
+                        "25": {
+                            "patterns": [
+                                {
+                                    "include": "#roles"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "object-types": {
+            "patterns": [
+                {
+                    "include": "#generics"
+                },
+                {
+                    "match": "\\b((?:[A-Za-z_]\\w*\\s*\\.\\s*)*[A-Z_]\\w*)\\s*(@\\s*([\\w$]+|\\([\\w\\s$,]+\\)))\\s*(?=<)",
+                    "captures": {
+                        "1": {
+                            "patterns": [
+                                {
+                                    "match": "[A-Za-z_]\\w*",
+                                    "name": "storage.type.choral"
+                                },
+                                {
+                                    "match": "\\.",
+                                    "name": "punctuation.separator.period.choral"
+                                }
+                            ]
+                        },
+                        "2": {
+                            "patterns": [
+                                {
+                                    "include": "#roles"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "match": "\\b((?:[A-Za-z_]\\w*\\s*\\.\\s*)*[A-Z_]\\w*)\\s*(@\\s*([\\w$]+|\\([\\w\\s$,]+\\)))((?=\\s+[A-Za-z$_\\n])|(?=\\s*\\.\\.\\.)|(?=\\s*::))",
+                    "captures": {
+                        "1": {
+                            "patterns": [
+                                {
+                                    "match": "[A-Za-z_]\\w*",
+                                    "name": "storage.type.choral"
+                                },
+                                {
+                                    "match": "\\.",
+                                    "name": "punctuation.separator.period.choral"
+                                }
+                            ]
+                        },
+                        "2": {
+                            "patterns": [
+                                {
+                                    "include": "#roles"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "object-types-inherited": {
+            "patterns": [
+                {
+                    "include": "#generics"
+                },
+                {
+                    "match": "\\b((?:[A-Z]\\w*\\s*(\\.)\\s*)*[A-Z]\\w*)\\s*(@\\s*([\\w$]+|\\([\\w\\s$,]+\\)))",
+                    "captures": {
+                        "1": {
+                            "name": "entity.other.inherited-class.choral"
+                        },
+                        "2": {
+                            "name": "punctuation.separator.period.choral"
+                        },
+                        "3": {
+                            "patterns": [
+                                {
+                                    "include": "#roles"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "match": ",",
+                    "name": "punctuation.separator.delimiter.choral"
+                }
+            ]
+        },
+        "objects": {
+            "match": "(?<![\\w$])([a-zA-Z_$][\\w$]*)\\s*(@\\s*([\\w$]+|\\([\\w\\s$,]+\\)))?(?=\\s*\\.\\s*[\\w$<]+)",
+            "captures": {
+                "1": {
+                    "name": "variable.other.object.choral"
+                },
+                "2": {
+                    "patterns": [
+                        {
+                            "include": "#roles"
+                        }
+                    ]
+                }
+            }
+        },
+        "parameters": {
+            "patterns": [
+                {
+                    "match": "\\bfinal\\b",
+                    "name": "storage.modifier.choral"
+                },
+                {
+                    "include": "#annotations"
+                },
+                {
+                    "include": "#all-types"
+                },
+                {
+                    "include": "#strings"
+                },
+                {
+                    "match": "(\\w+)\\s*()",
+                    "name": "variable.parameter.choral"
+                },
+                {
+                    "match": ",",
+                    "name": "punctuation.separator.delimiter.choral"
+                },
+                {
+                    "match": "\\.\\.\\.",
+                    "name": "punctuation.definition.parameters.varargs.choral"
+                }
+            ]
+        },
+        "parens": {
+            "patterns": [
+                {
+                    "begin": "\\(",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.bracket.round.choral"
+                        }
+                    },
+                    "end": "\\)",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.bracket.round.choral"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "#code"
+                        }
+                    ]
+                },
+                {
+                    "begin": "{",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.bracket.curly.choral"
+                        }
+                    },
+                    "end": "}",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.bracket.curly.choral"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "#code"
+                        }
+                    ]
+                }
+            ]
+        },
+        "primitive-types": {
+            "patterns": [
+                {
+                    "match": "\\b(void)\\b(?!\\s*@)",
+                    "captures": {
+                        "1": {
+                            "name": "storage.type.primitive.choral"
+                        }
+                    }
+                },
+                {
+                    "match": "\\b(boolean|byte|char|short|int|float|long|double)\\s*(@\\s*[\\w$]+)",
+                    "captures": {
+                        "1": {
+                            "name": "storage.type.primitive.choral"
+                        },
+                        "2": {
+                            "patterns": [
+                                {
+                                    "include": "#roles"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "properties": {
+            "patterns": [
+                {
+                    "match": "(\\.)\\s*([a-zA-Z_$][\\w$]*)(?=\\s*\\.\\s*[a-zA-Z_$][\\w$]*)",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.separator.period.choral"
+                        },
+                        "2": {
+                            "name": "variable.other.object.property.choral"
+                        }
+                    }
+                },
+                {
+                    "match": "(\\.)\\s*([a-zA-Z_$][\\w$]*)",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.separator.period.choral"
+                        },
+                        "2": {
+                            "name": "variable.other.object.property.choral"
+                        }
+                    }
+                },
+                {
+                    "match": "(\\.)\\s*([0-9][\\w$]*)",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.separator.period.choral"
+                        },
+                        "2": {
+                            "name": "invalid.illegal.identifier.choral"
+                        }
+                    }
+                }
+            ]
+        },
+        "roles": {
+            "patterns": [
+                {
+                    "match": "(@)\\s*([a-zA-Z_$][\\w$]*)",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.roles.choral"
+                        },
+                        "2": {
+                            "name": "variable.role.choral"
+                        }
+                    },
+                    "name": "meta.role.choral"
+                },
+                {
+                    "begin": "(@)\\s*(\\()",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.roles.choral"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.roles.begin.bracket.round.choral"
+                        }
+                    },
+                    "end": "\\)",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.roles.end.bracket.round.choral"
+                        }
+                    },
+                    "name": "meta.roles.choral",
+                    "contentName": "meta.roles.parameters.choral",
+                    "patterns": [
+                        {
+                            "include": "#comments"
+                        },
+                        {
+                            "match": "[a-zA-Z_$][\\w$]*",
+                            "name": "variable.role.choral"
+                        },
+                        {
+                            "match": ",",
+                            "name": "punctuation.separator.delimiter.choral"
+                        }
+                    ]
+                },
+                {
+                    "begin": "(@)\\s*(\\[)",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.roles.choral"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.roles.begin.bracket.square.choral"
+                        }
+                    },
+                    "end": "\\]",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.roles.end.bracket.square.choral"
+                        }
+                    },
+                    "name": "meta.rolelist.choral",
+                    "contentName": "meta.rolelist.parameters.choral",
+                    "patterns": [
+                        {
+                            "include": "#comments"
+                        },
+                        {
+                            "match": "[a-zA-Z_$][\\w$]*",
+                            "name": "variable.role.choral"
+                        },
+                        {
+                            "match": ",",
+                            "name": "punctuation.separator.delimiter.choral"
+                        }
+                    ]
+                }
+            ]
+        },
+        "storage-modifiers": {
+            "match": "\\b(public|private|protected|static|final|abstract|default)\\b",
+            "name": "storage.modifier.choral"
+        },
+        "strings": {
+            "patterns": [
+                {
+                    "begin": "(?=\")",
+                    "end": "(?<=\")\\s*(@\\s*([\\w$]+|\\[[\\w\\s$,]+\\]))",
+                    "endCaptures": {
+                        "1": {
+                            "patterns": [
+                                {
+                                    "include": "#roles"
+                                }
+                            ]
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "begin": "\"",
+                            "beginCaptures": {
+                                "0": {
+                                    "name": "punctuation.definition.string.begin.choral"
+                                }
+                            },
+                            "end": "\"",
+                            "endCaptures": {
+                                "0": {
+                                    "name": "punctuation.definition.string.end.choral"
+                                }
+                            },
+                            "name": "string.quoted.double.choral",
+                            "patterns": [
+                                {
+                                    "match": "\\\\.",
+                                    "name": "constant.character.escape.choral"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "begin": "(?=')",
+                    "end": "(?<=')\\s*(@\\s*([\\w$]+|\\[[\\w\\s$,]+\\]))",
+                    "endCaptures": {
+                        "1": {
+                            "patterns": [
+                                {
+                                    "include": "#roles"
+                                }
+                            ]
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "begin": "'",
+                            "beginCaptures": {
+                                "0": {
+                                    "name": "punctuation.definition.string.begin.choral"
+                                }
+                            },
+                            "end": "'",
+                            "endCaptures": {
+                                "0": {
+                                    "name": "punctuation.definition.string.end.choral"
+                                }
+                            },
+                            "name": "string.quoted.single.choral",
+                            "patterns": [
+                                {
+                                    "match": "\\\\.",
+                                    "name": "constant.character.escape.choral"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "try-catch": {
+            "patterns": [
+                {
+                    "begin": "\\btry\\b",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "keyword.control.try.choral"
+                        }
+                    },
+                    "end": "}",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.section.try.end.bracket.curly.choral"
+                        }
+                    },
+                    "name": "meta.try.choral",
+                    "patterns": [
+                        {
+                            "begin": "\\(",
+                            "beginCaptures": {
+                                "0": {
+                                    "name": "punctuation.section.try.resources.begin.bracket.round.choral"
+                                }
+                            },
+                            "end": "\\)",
+                            "endCaptures": {
+                                "0": {
+                                    "name": "punctuation.section.try.resources.end.bracket.round.choral"
+                                }
+                            },
+                            "name": "meta.try.resources.choral",
+                            "patterns": [
+                                {
+                                    "include": "#code"
+                                }
+                            ]
+                        },
+                        {
+                            "begin": "{",
+                            "beginCaptures": {
+                                "0": {
+                                    "name": "punctuation.section.try.begin.bracket.curly.choral"
+                                }
+                            },
+                            "end": "(?=})",
+                            "contentName": "meta.try.body.choral",
+                            "patterns": [
+                                {
+                                    "include": "#code"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "begin": "\\b(catch)\\b",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "keyword.control.catch.choral"
+                        }
+                    },
+                    "end": "}",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.section.catch.end.bracket.curly.choral"
+                        }
+                    },
+                    "name": "meta.catch.choral",
+                    "patterns": [
+                        {
+                            "include": "#comments"
+                        },
+                        {
+                            "begin": "\\(",
+                            "beginCaptures": {
+                                "0": {
+                                    "name": "punctuation.definition.parameters.begin.bracket.round.choral"
+                                }
+                            },
+                            "end": "\\)",
+                            "endCaptures": {
+                                "0": {
+                                    "name": "punctuation.definition.parameters.end.bracket.round.choral"
+                                }
+                            },
+                            "contentName": "meta.catch.parameters.choral",
+                            "patterns": [
+                                {
+                                    "include": "#comments"
+                                },
+                                {
+                                    "include": "#storage-modifiers"
+                                },
+                                {
+                                    "begin": "[a-zA-Z$_][\\.a-zA-Z0-9$_]*",
+                                    "beginCaptures": {
+                                        "0": {
+                                            "name": "storage.type.choral"
+                                        }
+                                    },
+                                    "end": "(\\|)|(?=\\))",
+                                    "endCaptures": {
+                                        "1": {
+                                            "name": "punctuation.catch.separator.choral"
+                                        }
+                                    },
+                                    "patterns": [
+                                        {
+                                            "include": "#comments"
+                                        },
+                                        {
+                                            "match": "\\w+",
+                                            "captures": {
+                                                "0": {
+                                                    "name": "variable.parameter.choral"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "begin": "{",
+                            "beginCaptures": {
+                                "0": {
+                                    "name": "punctuation.section.catch.begin.bracket.curly.choral"
+                                }
+                            },
+                            "end": "(?=})",
+                            "contentName": "meta.catch.body.choral",
+                            "patterns": [
+                                {
+                                    "include": "#code"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "variables": {
+            "begin": "(?x)(?=\n  \\b\n  (\n    (boolean|byte|char|short|int|float|long|double)\\s*@\\s*[\\w$]+\n    |\n    (?>(\\w+\\.)*[A-Z_]+\\w*\\s*@\\s*([\\w$]+|\\([\\w\\s$,]+\\))) # e.g. `javax.ws.rs.Response@(A, B)`, or `String@B`\n  )\n  \n  \\s*\n  (\n    <[\\w<>,\\.\\s]*> # e.g. `HashMap<Integer, String>`, or `List<java.lang.String>`\n  )?\n  \\s+\n  [A-Za-z_$][\\w$]* # At least one identifier after space\n  ([\\w,$][\\w,\\s]*)? # possibly additional identifiers\n  \\s*(=|:|;)\n)",
+            "end": "(?=\\=|:|;)",
+            "name": "meta.definition.variable.choral",
+            "patterns": [
+                {
+                    "match": "([A-Za-z$_][\\w$]*)(?=\\s*(;|:|=|,))",
+                    "captures": {
+                        "1": {
+                            "name": "variable.other.definition.choral"
+                        }
+                    }
+                },
+                {
+                    "include": "#all-types"
+                },
+                {
+                    "include": "#code"
+                }
+            ]
+        }
+    }
+}
