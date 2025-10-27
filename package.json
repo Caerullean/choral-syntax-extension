@@ -3,6 +3,12 @@
   "displayName": "Choral Syntax Extension",
   "description": "An extension to provide help with writing choral code in VS Code",
   "version": "0.0.1",
+  "author": "Caerullean",
+  "license": "MIT",
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/Caerullean/choral-syntax-extension"
+  },
   "engines": {
     "vscode": "^1.79.2"
   },
@@ -70,14 +76,14 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.103.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "22.x",
+    "@types/vscode": "^1.79.2",
     "@typescript-eslint/eslint-plugin": "^8.42.0",
     "@typescript-eslint/parser": "^8.42.0",
-    "eslint": "^9.34.0",
-    "typescript": "^5.9.2",
     "@vscode/test-cli": "^0.0.11",
-    "@vscode/test-electron": "^2.5.2"
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.34.0",
+    "typescript": "^5.9.2"
   }
 }
